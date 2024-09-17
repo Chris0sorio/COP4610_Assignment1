@@ -1,6 +1,10 @@
+//Christian Osorio
+//Panther ID: 6271149
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 #include <sys/wait.h>
 
 int factorial(int n){
@@ -59,8 +63,6 @@ int main(){
         printf("Invalid number selection, please run the program again");
         return 1;
     }
-    
-    //printf("The number of children entered is: %d", n);
   
     printf("Parent process (PID: %d) is creating %d child processes.\n", getpid(), n);
 
@@ -71,9 +73,7 @@ int main(){
             printf("Fork failed!");
             return 1;
         }else if (pid == 0) {
-            //child process
-            //printf("Child %d(PID:%d) started.\n", i+1, getpid());
-
+            
             if (i == 0){
                 printf("Child %d(PID: %d) is computing the factorial of 5.\n", i+1, getpid());
                 factorial(5);
@@ -82,11 +82,14 @@ int main(){
                 printf("Child %d(PID: %d) is find prime numbers up to 20.\n", i+1, getpid());
                 printf("Child %d(PID: %d) completed its task. Result: ", i+1, getpid());
                 find_prime(20); 
-            } else{
+            } else if (i == 2){
                 printf("Child %d(PID: %d) is computing 8 to the power of 3.\n", i+1, getpid());
                 power(8,3);
                 printf("Child %d(PID: %d) completed its task. Result: %d.\n", i+1, getpid(), power(8,3));
-            } 
+            } else if(i == 3){
+                printf("Child %d(PID: %d) is computing the square root of 49.\n", i+1, getpid());
+                printf("Child %d(PID: %d) completed its task. Result: %f.\n", i+1, getpid(), sqrt(49));
+            }
             return 0;
         }
     }
